@@ -1,15 +1,15 @@
 # 3D Tags Cloud
 
-> 一个基于 `Vue3` 开发的 `3D标签云` 效果
+> A `3D tag cloud` effect developed based on `Vue3`
 
-## 使用方法，引入组件即可
+## How to use, just import the component
 
 ```Vue
 <TagsCloud :data="data" :boxWidth="600" :speed="600" randomColor />
 import TagsCloud from "@/components/tagsCloud.vue";
 ```
 
-`data` 数据源，格式为
+`data` The data source, in the format
 
 ```array
 [
@@ -20,8 +20,8 @@ import TagsCloud from "@/components/tagsCloud.vue";
 ]
 ```
 
-`boxWidth` 容器宽度，默认 `600px`
+`boxWidth` container width, default `600px`
 
-`speed` 模型转动速度，默认 `600`
+`speed` Model rotation speed, default `600`
 
-`randomColor` 是否随机颜色，默认 `true`
+`randomColor` Whether random color, default `true`
