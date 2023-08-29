@@ -1,158 +1,168 @@
 <template>
-	<div class="page">
-		<div class="tagsCloud" :style="{ height: boxWidth + 'px', width: boxWidth + 'px' }" ref="Panel" @mousemove="listener($event)">
-			<div
-				class="item"
-				v-for="(item, index) in useArray"
-				:key="index"
-				:style="[
-					{ opacity: (400 + item.z) / 600 },
-					{ 'font-size': 12 * (600 / (400 - item.z)) + 'px' },
-					{ left: item.x + 'px' },
-					{ top: item.y + 'px' },
-					{ zIndex: item.zindexVal },
-					{ display: 'inline-block' },
-					{ color: item.rcolor }
-				]"
-				@click="toUrl(item.url)"
-			>
-				{{ item.name }}
-			</div>
-		</div>
-	</div>
+  <div class="page">
+    <div class="tagsCloud" ref="tagsCloud" :style="{ height: $props.boxWidth + 'px', width: $props.boxWidth + 'px' }" @mousemove="listener($event)">
+      <div
+        class="item"
+        v-for="(item, index) in state.data"
+        :key="index"
+        :style="[
+          { opacity: (400 + item.z) / 600 },
+          { 'font-size': 12 * (600 / (400 - item.z)) + 'px' },
+          { left: item.x + 'px' },
+          { top: item.y + 'px' },
+          { zIndex: item.zindexVal },
+          { display: 'inline-block' },
+          { color: item.rcolor },
+        ]"
+        @click="toUrl(item.url)"
+      >
+        {{ item.name }}
+      </div>
+    </div>
+  </div>
 </template>
 
-<script>
-import Vue from 'vue';
-export default {
-	props: ['useArray', 'boxWidth', 'speed', 'randomColor'],
+<script setup>
+import { computed, onBeforeMount, onMounted, reactive, ref } from "vue";
+const $props = defineProps({
+  data: {
+    default: [],
+    type: Array,
+  },
+  boxWidth: {
+    default: 600,
+    type: Number,
+  },
+  speed: {
+    default: 600,
+    type: Number,
+  },
+  randomColor: {
+    default: true,
+    type: Boolean,
+  },
+});
 
-	data() {
-		return {
-			speedX: Math.PI / this.speed,
-			speedY: Math.PI / this.speed
-		};
-	},
-	computed: {
-		radius() {
-			return this.boxWidth / 3;
-		},
-		CX() {
-			//球心x坐标
-			return this.boxWidth / 2;
-		},
-		CY() {
-			//球心y坐标
-			return this.boxWidth / 2;
-		},
-		EX() {
-			return this.boxWidth + document.body.scrollLeft + document.documentElement.scrollLeft;
-		},
-		EY() {
-			return this.boxWidth + document.body.scrollTop + document.documentElement.scrollTop;
-		}
-	},
-	created() {
-		this.init();
-	},
-	mounted() {
-		//使球开始旋转
-		setInterval(() => {
-			this.rotateX();
-			this.rotateY();
-		}, 10);
-	},
-	methods: {
-		init() {
-			let winWidth = document.body.clientWidth;
-			if (this.boxWidth > winWidth) {
-				this.boxWidth = winWidth;
-			}
-			this.useArray.forEach((item, key) => {
-				let k = -1 + (2 * (key + 1) - 1) / this.useArray.length;
-				let a = Math.acos(k);
-				let b = a * Math.sqrt(this.useArray.length * Math.PI);
+const state = reactive({
+  speedX: Math.PI / $props.speed,
+  speedY: Math.PI / $props.speed,
+  data: [],
+});
 
-				// X,Y,Z
-				Vue.set(item, 'x', this.radius * Math.sin(a) * Math.cos(b) + this.CX);
-				Vue.set(item, 'y', this.radius * Math.sin(a) * Math.sin(b) + this.CX);
-				Vue.set(item, 'z', this.radius * Math.cos(a));
+const radius = computed(() => $props.boxWidth / 3);
+const CX = computed(() => $props.boxWidth / 2);
+const CY = computed(() => $props.boxWidth / 2);
+const EX = computed(() => $props.boxWidth + document.body.scrollLeft + document.documentElement.scrollLeft);
+const EY = computed(() => $props.boxWidth + document.body.scrollTop + document.documentElement.scrollTop);
 
-				// 随机色
-				if (this.randomColor) {
-					Vue.set(item, 'rcolor', 'rgb(' + parseInt(Math.random() * 255) + ',' + parseInt(Math.random() * 255) + ',' + parseInt(Math.random() * 255) + ')');
-				}
+const init = () => {
+  let winWidth = document.body.clientWidth;
+  if ($props.boxWidth > winWidth) {
+    $props.boxWidth = winWidth;
+  }
 
-				// Z-index
-				let scale = this.boxWidth / (this.boxWidth - item.z);
-				Vue.set(item, 'zindexVal', parseInt(scale * 100));
-			});
-		},
-		rotateX() {
-			var cos = Math.cos(this.speedX);
-			var sin = Math.sin(this.speedX);
-			// for (let tag of this.useArray) {
-			// 	var y1 = (tag.y - this.CY) * cos - tag.z * sin + this.CY;
-			// 	var z1 = tag.z * cos + (tag.y - this.CY) * sin;
-			// 	tag.y = y1;
-			// 	tag.z = z1;
-			// }
-			this.useArray.forEach((item, key) => {
-				var y1 = (item.y - this.CY) * cos - item.z * sin + this.CY;
-				var z1 = item.z * cos + (item.y - this.CY) * sin;
-				item.y = y1;
-				item.z = z1;
+  state.data.forEach((item, key) => {
+    let k = -1 + (2 * (key + 1) - 1) / state.data.length;
+    let a = Math.acos(k);
+    let b = a * Math.sqrt(state.data.length * Math.PI);
 
-				let scale = this.boxWidth / (this.boxWidth - item.z);
-				item.zindexVal = parseInt(scale * 100);
-			});
-		},
-		rotateY() {
-			var cos = Math.cos(this.speedY);
-			var sin = Math.sin(this.speedY);
-			this.useArray.forEach(item => {
-				var x1 = (item.x - this.CX) * cos - item.z * sin + this.CX;
-				var z1 = item.z * cos + (item.x - this.CX) * sin;
-				item.x = x1;
-				item.z = z1;
+    // X,Y,Z
+    item.x = radius.value * Math.sin(a) * Math.cos(b) + CX.value;
+    item.y = radius.value * Math.sin(a) * Math.sin(b) + CX.value;
+    item.z = radius.value * Math.cos(a);
 
-				let scale = this.boxWidth / (this.boxWidth - item.z);
-				item.zindexVal = parseInt(scale * 100);
-			});
-		},
-		listener(event) {
-			//响应鼠标移动
-			var refX = this.$refs.Panel.offsetLeft;
-			var refY = this.$refs.Panel.offsetTop;
-			var x = event.clientX - refX - this.CX;
-			var y = event.clientY - refY - this.CY;
+    // 随机色
+    if ($props.randomColor) {
+      item.rcolor = `rbg(${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)})`;
+    }
 
-			// this.x + CX - this.ele.offsetWidth/2 +"px";
-			this.speedY = x * 0.0001 > 0 ? Math.min(this.radius * 0.00002, x * 0.0001) : Math.max(-this.radius * 0.00002, x * 0.0001);
-			this.speedX = y * 0.0001 > 0 ? Math.min(this.radius * 0.00002, y * 0.0001) : Math.max(-this.radius * 0.00002, y * 0.0001);
-		},
-		toUrl(url) {
-			window.location.href = url;
-		}
-	}
+    // Z-index
+    let scale = $props.boxWidth / ($props.boxWidth - item.z);
+    item.zindexVal = parseInt(scale * 100);
+  });
 };
+
+const rotateX = () => {
+  var cos = Math.cos(state.speedX);
+  var sin = Math.sin(state.speedX);
+  // for (let tag of state.data) {
+  // 	var y1 = (tag.y - CY.value) * cos - tag.z * sin + CY.value;
+  // 	var z1 = tag.z * cos + (tag.y - CY.value) * sin;
+  // 	tag.y = y1;
+  // 	tag.z = z1;
+  // }
+  state.data.forEach((item, key) => {
+    var y1 = (item.y - CY.value) * cos - item.z * sin + CY.value;
+    var z1 = item.z * cos + (item.y - CY.value) * sin;
+    item.y = y1;
+    item.z = z1;
+
+    let scale = $props.boxWidth / ($props.boxWidth - item.z);
+    item.zindexVal = parseInt(scale * 100);
+  });
+};
+
+const rotateY = () => {
+  var cos = Math.cos(state.speedY);
+  var sin = Math.sin(state.speedY);
+
+  state.data.forEach((item) => {
+    var x1 = (item.x - CX.value) * cos - item.z * sin + CX.value;
+    var z1 = item.z * cos + (item.x - CX.value) * sin;
+    item.x = x1;
+    item.z = z1;
+
+    let scale = $props.boxWidth / ($props.boxWidth - item.z);
+    item.zindexVal = parseInt(scale * 100);
+  });
+};
+
+const tagsCloud = ref();
+const listener = (event) => {
+  //响应鼠标移动
+  var refX = tagsCloud.offsetLeft;
+  var refY = tagsCloud.offsetTop;
+  var x = event.clientX - refX - CX.value;
+  var y = event.clientY - refY - CY.value;
+
+  // this.x + CX - this.ele.offsetWidth/2 +"px";
+  state.speedY = x * 0.0001 > 0 ? Math.min(radius.value * 0.00002, x * 0.0001) : Math.max(-radius.value * 0.00002, x * 0.0001);
+  state.speedX = y * 0.0001 > 0 ? Math.min(radius.value * 0.00002, y * 0.0001) : Math.max(-radius.value * 0.00002, y * 0.0001);
+};
+
+const toUrl = (url) => {
+  window.location.href = url;
+};
+
+onMounted(() => {
+  state.data = $props.data;
+  init();
+});
+
+onBeforeMount(() => {
+  rotateX();
+  rotateY();
+});
 </script>
 
 <style scoped lang="scss">
 .tagsCloud {
-	position: relative;
-	display: inline-block;
-	max-width: 100%;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
 }
 .item {
-	position: absolute;
-	cursor: pointer;
-	text-align: center;
-	transform: translate(-50%, -50%);
-	background-color: transparent;
-	outline: none;
-	&:hover {
-		border: 2px solid #666;
-	}
+  position: absolute;
+  cursor: pointer;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  outline: none;
+  transition: all 0.4s;
+  border: 2px solid transparent;
+
+  &:hover {
+    border-color: #666;
+  }
 }
 </style>
