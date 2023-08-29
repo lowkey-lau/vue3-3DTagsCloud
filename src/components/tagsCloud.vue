@@ -10,9 +10,9 @@
           { 'font-size': 12 * (600 / (400 - item.z)) + 'px' },
           { left: item.x + 'px' },
           { top: item.y + 'px' },
-          { zIndex: item.zindexVal },
+          { zIndex: item.zindex },
           { display: 'inline-block' },
-          { color: item.rcolor },
+          { color: `${item.rcolor}` },
         ]"
         @click="toUrl(item.url)"
       >
@@ -73,32 +73,23 @@ const init = () => {
 
     // 随机色
     if ($props.randomColor) {
-      item.rcolor = `rbg(${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)})`;
+      item.rcolor = `rgb(${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)})`;
     }
 
     // Z-index
     let scale = $props.boxWidth / ($props.boxWidth - item.z);
-    item.zindexVal = parseInt(scale * 100);
+    item.zindex = parseInt(scale * 100);
   });
 };
 
 const rotateX = () => {
   var cos = Math.cos(state.speedX);
   var sin = Math.sin(state.speedX);
-  // for (let tag of state.data) {
-  // 	var y1 = (tag.y - CY.value) * cos - tag.z * sin + CY.value;
-  // 	var z1 = tag.z * cos + (tag.y - CY.value) * sin;
-  // 	tag.y = y1;
-  // 	tag.z = z1;
-  // }
-  state.data.forEach((item, key) => {
-    var y1 = (item.y - CY.value) * cos - item.z * sin + CY.value;
-    var z1 = item.z * cos + (item.y - CY.value) * sin;
-    item.y = y1;
-    item.z = z1;
 
-    let scale = $props.boxWidth / ($props.boxWidth - item.z);
-    item.zindexVal = parseInt(scale * 100);
+  state.data.forEach((item, key) => {
+    item.y = (item.y - CY.value) * cos - item.z * sin + CY.value;
+    item.z = item.z * cos + (item.y - CY.value) * sin;
+    item.zindex = parseInt(($props.boxWidth / ($props.boxWidth - item.z)) * 100);
   });
 };
 
@@ -107,13 +98,9 @@ const rotateY = () => {
   var sin = Math.sin(state.speedY);
 
   state.data.forEach((item) => {
-    var x1 = (item.x - CX.value) * cos - item.z * sin + CX.value;
-    var z1 = item.z * cos + (item.x - CX.value) * sin;
-    item.x = x1;
-    item.z = z1;
-
-    let scale = $props.boxWidth / ($props.boxWidth - item.z);
-    item.zindexVal = parseInt(scale * 100);
+    item.x = (item.x - CX.value) * cos - item.z * sin + CX.value;
+    item.z = item.z * cos + (item.x - CX.value) * sin;
+    item.zindex = parseInt(($props.boxWidth / ($props.boxWidth - item.z)) * 100);
   });
 };
 
@@ -137,6 +124,8 @@ const toUrl = (url) => {
 onMounted(() => {
   state.data = $props.data;
   init();
+
+  console.log(state.data);
 });
 
 onBeforeMount(() => {
