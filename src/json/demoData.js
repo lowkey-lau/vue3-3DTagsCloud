@@ -1,202 +1,202 @@
 export const demoData = [
   {
     name: "Irish Spring",
-    url: "Enoch_Eastwood8658@twipet.com",
+    url: "https://www.google.com",
   },
   {
     name: "Redken",
-    url: "Doris_Wade7948@bulaffy.com",
+    url: "https://www.google.com",
   },
   {
     name: "Natura",
-    url: "Ilona_Vallory9282@corti.com",
+    url: "https://www.google.com",
   },
   {
     name: "Smashbox",
-    url: "Jenna_Kennedy5321@bretoux.com",
+    url: "https://www.google.com",
   },
   {
     name: "ClarinsMen",
-    url: "Anabelle_Addison3322@nickia.com",
+    url: "https://www.google.com",
   },
   {
     name: "NARS Cosmetics",
-    url: "Chelsea_Jones2342@bretoux.com",
+    url: "https://www.google.com",
   },
   {
     name: "Kérastase",
-    url: "Roger_Khan5716@naiker.biz",
+    url: "https://www.google.com",
   },
   {
     name: "ClarinsMen",
-    url: "Hayden_Ellery25@gembat.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Colourpop Cosmetics",
-    url: "Josh_Cobb1642@yahoo.com",
+    url: "https://www.google.com",
   },
   {
     name: "LOreal",
-    url: "Helen_Edmonds7735@nickia.com",
+    url: "https://www.google.com",
   },
   {
     name: "Shiseido",
-    url: "Chelsea_Owen9510@iatim.tech",
+    url: "https://www.google.com",
   },
   {
     name: "Colourpop Cosmetics",
-    url: "Henry_Isaac3381@elnee.tech",
+    url: "https://www.google.com",
   },
   {
     name: "NYX Cosmetics",
-    url: "Carl_Archer9164@acrit.org",
+    url: "https://www.google.com",
   },
   {
     name: "Vichy",
-    url: "Hank_Overson9487@atink.com",
+    url: "https://www.google.com",
   },
   {
     name: "Bobbi Brown",
-    url: "Kieth_Chappell2652@eirey.tech",
+    url: "https://www.google.com",
   },
   {
     name: "Inglot",
-    url: "Julian_Woodley9025@elnee.tech",
+    url: "https://www.google.com",
   },
   {
     name: "	Sunsilk",
-    url: "Lexi_Plant6418@hourpy.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Sephora",
-    url: "Denis_Dillon5646@ovock.tech",
+    url: "https://www.google.com",
   },
   {
     name: "NARS Cosmetics",
-    url: "Henry_Shaw199@cispeto.com",
+    url: "https://www.google.com",
   },
   {
     name: "NYX Cosmetics",
-    url: "Maxwell_Vinton7120@qater.org",
+    url: "https://www.google.com",
   },
   {
     name: "Christian Dior",
-    url: "Marina_Gordon9750@elnee.tech",
+    url: "https://www.google.com",
   },
   {
     name: "LOreal",
-    url: "Nicholas_Shields5568@mafthy.com",
+    url: "https://www.google.com",
   },
   {
     name: "Sephora",
-    url: "Benjamin_Jones2756@brety.org",
+    url: "https://www.google.com",
   },
   {
     name: "	Sunsilk",
-    url: "Bob_Brett4807@sveldo.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Nivea",
-    url: "Kirsten_Booth9232@nimogy.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Bobbi Brown",
-    url: "Rick_Evans5938@grannar.com",
+    url: "https://www.google.com",
   },
   {
     name: "	Sunsilk",
-    url: "Sebastian_Woodley7482@gompie.com",
+    url: "https://www.google.com",
   },
   {
     name: "Sephora",
-    url: "Oliver_Weasley4931@typill.biz",
+    url: "https://www.google.com",
   },
   {
     name: "LOccitane",
-    url: "Nicole_Ellison9614@supunk.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Oriflame",
-    url: "Rose_Salt6546@tonsy.org",
+    url: "https://www.google.com",
   },
   {
     name: "Kérastase",
-    url: "Leilani_Fleming4475@kideod.biz",
+    url: "https://www.google.com",
   },
   {
     name: "La Roche-Posay",
-    url: "Miriam_Price4406@ovock.tech",
+    url: "https://www.google.com",
   },
   {
     name: "Inglot",
-    url: "Rosie_Cobb4063@jiman.org",
+    url: "https://www.google.com",
   },
   {
     name: "Smashbox",
-    url: "Parker_Rivers3468@typill.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Nivea",
-    url: "Marvin_Snow783@fuliss.net",
+    url: "https://www.google.com",
   },
   {
     name: "Bobbi Brown",
-    url: "Carmella_Bell8499@jiman.org",
+    url: "https://www.google.com",
   },
   {
     name: "Revolution Makeup London",
-    url: "Mavis_Saunders5041@naiker.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Matrix",
-    url: "Cynthia_Powell9878@dionrab.com",
+    url: "https://www.google.com",
   },
   {
     name: "Kat Von D",
-    url: "Hank_Janes3085@infotech44.tech",
+    url: "https://www.google.com",
   },
   {
     name: "Irish Spring",
-    url: "Elena_Wright8787@nickia.com",
+    url: "https://www.google.com",
   },
   {
     name: "Aveda Men",
-    url: "Martin_Gosling1460@ubusive.com",
+    url: "https://www.google.com",
   },
   {
     name: "M.A.C.",
-    url: "Tyler_Talbot4792@supunk.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Kat Von D",
-    url: "Alexia_Morris9017@grannar.com",
+    url: "https://www.google.com",
   },
   {
     name: "Redken",
-    url: "Hayden_Spencer4267@brety.org",
+    url: "https://www.google.com",
   },
   {
     name: "Oriflame",
-    url: "Erick_Weldon1319@gmail.com",
+    url: "https://www.google.com",
   },
   {
     name: "Sephora",
-    url: "Tony_Campbell8525@bauros.biz",
+    url: "https://www.google.com",
   },
   {
     name: "Chanel",
-    url: "Selena_Cox7001@grannar.com",
+    url: "https://www.google.com",
   },
   {
     name: "Kérastase",
-    url: "Hayden_Ellis8601@infotech44.tech",
+    url: "https://www.google.com",
   },
   {
     name: "M.A.C.",
-    url: "Ryan_Rogers1562@twace.org",
+    url: "https://www.google.com",
   },
   {
     name: "Sephora",
-    url: "Johnny_Douglas7923@gompie.com",
+    url: "https://www.google.com",
   },
 ];

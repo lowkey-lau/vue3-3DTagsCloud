@@ -1,23 +1,21 @@
 <template>
-  <div class="page">
-    <div class="tagsCloud" ref="tagsCloud" :style="{ height: $props.boxWidth + 'px', width: $props.boxWidth + 'px' }" @mousemove="listener($event)">
-      <div
-        class="item"
-        v-for="(item, index) in state.data"
-        :key="index"
-        :style="[
-          { opacity: (400 + item.z) / 600 },
-          { 'font-size': 12 * (600 / (400 - item.z)) + 'px' },
-          { left: item.x + 'px' },
-          { top: item.y + 'px' },
-          { zIndex: item.zindex },
-          { display: 'inline-block' },
-          { color: `${item.rcolor}` },
-        ]"
-        @click="toUrl(item.url)"
-      >
-        {{ item.name }}
-      </div>
+  <div class="tagsCloud" ref="tagsCloud" :style="{ height: $props.boxWidth + 'px', width: $props.boxWidth + 'px' }" @mousemove="listener($event)">
+    <div
+      class="item"
+      v-for="(item, index) in state.data"
+      :key="index"
+      :style="[
+        { opacity: (400 + item.z) / 600 },
+        { 'font-size': 12 * (600 / (400 - item.z)) + 'px' },
+        { left: item.x + 'px' },
+        { top: item.y + 'px' },
+        { zIndex: item.zindex },
+        { display: 'inline-block' },
+        { color: `${item.rcolor}` },
+      ]"
+      @click="toUrl(item.url)"
+    >
+      {{ item.name }}
     </div>
   </div>
 </template>
@@ -46,14 +44,13 @@ const $props = defineProps({
 const state = reactive({
   speedX: Math.PI / $props.speed,
   speedY: Math.PI / $props.speed,
+  timer: null,
   data: [],
 });
 
 const radius = computed(() => $props.boxWidth / 3);
 const CX = computed(() => $props.boxWidth / 2);
 const CY = computed(() => $props.boxWidth / 2);
-const EX = computed(() => $props.boxWidth + document.body.scrollLeft + document.documentElement.scrollLeft);
-const EY = computed(() => $props.boxWidth + document.body.scrollTop + document.documentElement.scrollTop);
 
 const init = () => {
   let winWidth = document.body.clientWidth;
@@ -71,14 +68,13 @@ const init = () => {
     item.y = radius.value * Math.sin(a) * Math.sin(b) + CX.value;
     item.z = radius.value * Math.cos(a);
 
-    // 随机色
+    // random color
     if ($props.randomColor) {
       item.rcolor = `rgb(${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 255)})`;
     }
 
     // Z-index
-    let scale = $props.boxWidth / ($props.boxWidth - item.z);
-    item.zindex = parseInt(scale * 100);
+    item.zindex = parseInt(($props.boxWidth / ($props.boxWidth - item.z)) * 100);
   });
 };
 
@@ -106,9 +102,9 @@ const rotateY = () => {
 
 const tagsCloud = ref();
 const listener = (event) => {
-  //响应鼠标移动
-  var refX = tagsCloud.offsetLeft;
-  var refY = tagsCloud.offsetTop;
+  //listener mouse event
+  var refX = tagsCloud.value.offsetLeft;
+  var refY = tagsCloud.value.offsetTop;
   var x = event.clientX - refX - CX.value;
   var y = event.clientY - refY - CY.value;
 
@@ -118,19 +114,19 @@ const listener = (event) => {
 };
 
 const toUrl = (url) => {
-  window.location.href = url;
+  window.open(url);
 };
 
 onMounted(() => {
   state.data = $props.data;
   init();
-
-  console.log(state.data);
 });
 
 onBeforeMount(() => {
-  rotateX();
-  rotateY();
+  state.timer = setInterval(() => {
+    rotateX();
+    rotateY();
+  }, 50);
 });
 </script>
 
