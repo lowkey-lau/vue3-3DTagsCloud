@@ -2,7 +2,7 @@
 
 > A `3D tag cloud` effect developed based on `Vue3`
 
-# DEMO
+## DEMO
 
 <img src="./src/assets/demo.png">
 
