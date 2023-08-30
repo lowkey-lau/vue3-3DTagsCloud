@@ -4,7 +4,7 @@
 
 # DEMO
 
-![DEMO Img]("https://github.com/lowkey-lau/vue3-3DTagsCloud/blob/master/src/assets/demo.png")
+<img src="./src/assets/demo.png">
 
 ## How to use, just import the component
 
