@@ -2,6 +2,10 @@
 
 > A `3D tag cloud` effect developed based on `Vue3`
 
+# DEMO
+
+![DEMO Img]("https://github.com/lowkey-lau/vue3-3DTagsCloud/blob/master/src/assets/demo.png")
+
 ## How to use, just import the component
 
 ```Vue
